@@ -1,16 +1,16 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpodsetup/Login/login_repo.dart';
+import 'package:riverpodsetup/authentication/application/providers/auth_provider.dart';
 
-class LoginView extends ConsumerWidget {
+
+class LoginView extends StatelessWidget {
    LoginView({super.key});
   final emailController=TextEditingController();
 
   final passController=TextEditingController();
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Padding(
@@ -21,15 +21,22 @@ class LoginView extends ConsumerWidget {
               TextField(
                 controller: emailController,
                 decoration: InputDecoration(),
-        
               ),
               TextField(
                 controller: passController,
               ),
-              ElevatedButton(
-                onPressed: (){
-                  ref.read(loginProvider).userLogin(emailController.text, passController.text,context);
-              }, child: Text("login")
+              Consumer(
+                builder: (context,ref,_){
+                  bool isLoginLoading=ref.watch(authNotifierProvider);
+                  return isLoginLoading?
+                  const CircularProgressIndicator():
+                  ElevatedButton(onPressed: (){
+                    ref.read(authNotifierProvider.notifier).login(
+                      email: emailController.text,
+                       password: passController.text,
+                        context: context);
+                  }, child: Text("login"));
+                },
               )
             ],
           ),

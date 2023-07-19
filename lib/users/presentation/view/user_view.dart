@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpodsetup/ListUser/provider.dart';
+import 'package:riverpodsetup/users/application/provider.dart';
 
 
 class UserDisplayView extends ConsumerWidget {

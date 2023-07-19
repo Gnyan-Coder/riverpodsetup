@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:riverpodsetup/Data/Exception/app_exception.dart';
-import 'package:riverpodsetup/Data/Network/base_api_services.dart';
+import 'package:riverpodsetup/api/Network/base_api_services.dart';
 
+import '../exception/app_exception.dart';
 class NetworkApiServices extends BaseApiServices{
 
   @override
